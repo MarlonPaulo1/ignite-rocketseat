@@ -5,17 +5,11 @@ import { useEffect, useState } from "react"
 
 // https: //api.github.com/user/marlonpaulo1
 
-const repository = {
-    name: 'unform',
-    description: 'Form in React',
-    link: 'https://github.com/unform/unform'
-}
-
 export function RepositoryList() {
     const [repositories, steRepositories] = useState([])
 
     useEffect(() => {
-        fetch('https: //api.github.com/user/marlonpaulo1/repos')
+        fetch('https://api.github.com/users/MarlonPaulo1/repos')
             .then(response => response.json())
             .then(data => steRepositories(data))
     }, [])
@@ -25,10 +19,9 @@ export function RepositoryList() {
             <h1>Lista de repositórios</h1>
 
             <ul>
-              <RepositoryItem repository={repository} />  
-              <RepositoryItem repository={repository} />  
-              <RepositoryItem repository={repository} />  
-              <RepositoryItem repository={repository} />  
+              {repositories.map(repository => {
+                  return <RepositoryItem key={repository.name} repository={repository} />  
+              })}  
             </ul>
         </section>
     )
